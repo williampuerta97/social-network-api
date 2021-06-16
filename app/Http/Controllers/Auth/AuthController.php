@@ -18,6 +18,9 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+        ], [], [
+            "password" => "Contraseña",
+            "name" => "Nombre"
         ]);
 
         if ($validateData->fails()) {
@@ -34,11 +37,11 @@ class AuthController extends Controller
             'password' => Hash::make($inputs['password']),
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        //$token = $user->createToken('auth_token')->plainTextToken;
 
         return response([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
+            //'access_token' => $token,
+            //'token_type' => 'Bearer',
             'user' => $user
         ], 200);
     }
@@ -63,7 +66,6 @@ class AuthController extends Controller
 
         return response([
             'access_token' => $token,
-            'token_type' => 'Bearer'
         ]);
     }
 
